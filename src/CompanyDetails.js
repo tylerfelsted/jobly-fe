@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import JoblyApi from './api';
-import { Container, Card } from 'react-bootstrap';
+import JobCard from './JobCard';
+import { Container } from 'react-bootstrap';
 
 function CompanyDetails() {
   const {handle} = useParams();
@@ -14,7 +15,7 @@ function CompanyDetails() {
       setDetails(details);
     }
     callApi();
-  }, [])
+  }, [handle])
 
 
   if(!details) {
@@ -24,6 +25,9 @@ function CompanyDetails() {
   return (
     <Container>
       <h1>{details.name}</h1>
+      {details.jobs.map(j => {
+        return <JobCard key={j.id} jobDetails={j}/>
+      })}
     </Container>
   )
 }
