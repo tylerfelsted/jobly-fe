@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import CompanyDetails from './CompanyDetails';
 import CompanyList from './CompanyList';
+import JobList from './JobList';
 
 
 
@@ -18,7 +19,7 @@ function Routes() {
         <CompanyDetails />
       </Route>
       <Route exact path='/jobs'>
-        <h1>Jobs</h1>
+        <JobList />
       </Route>
       <Route exact path='/login'>
         <h1>Log In</h1>
