@@ -1,5 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import CompanyDetails from './CompanyDetails';
+import CompanyList from './CompanyList';
 
 
 
@@ -10,10 +12,10 @@ function Routes() {
         <h1>Home Page</h1>
       </Route>
       <Route exact path='/companies'>
-        <h1>Companies</h1>
+        <CompanyList />
       </Route>
       <Route exact path='/companies/:handle'>
-        <h1>Company Details</h1>
+        <CompanyDetails />
       </Route>
       <Route exact path='/jobs'>
         <h1>Jobs</h1>
