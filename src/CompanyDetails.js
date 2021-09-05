@@ -1,21 +1,25 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import JoblyApi from './api';
 import JobCard from './JobCard';
 import { Container } from 'react-bootstrap';
 
 function CompanyDetails() {
   const {handle} = useParams();
-  
   const [details, setDetails] = useState();
+  const history = useHistory();
 
   useEffect(() => {
     async function callApi() {
-      let details = await JoblyApi.getCompany(handle);
-      setDetails(details);
+      try{
+        let details = await JoblyApi.getCompany(handle);
+        setDetails(details);
+      } catch(e) {
+        history.push('/login');
+      }
     }
     callApi();
-  }, [handle])
+  }, [handle, history])
 
 
   if(!details) {

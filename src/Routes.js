@@ -3,10 +3,13 @@ import { Route, Switch } from 'react-router-dom';
 import CompanyDetails from './CompanyDetails';
 import CompanyList from './CompanyList';
 import JobList from './JobList';
+import SignupForm from './SignupForm';
+import LoginForm from './LoginForm';
+import EditProfileForm from './EditProfileForm';
 
 
 
-function Routes() {
+function Routes({ login, signup }) {
   return (
     <Switch>
       <Route exact path='/'>
@@ -22,13 +25,13 @@ function Routes() {
         <JobList />
       </Route>
       <Route exact path='/login'>
-        <h1>Log In</h1>
+        <LoginForm login={login}/>
       </Route>
       <Route exact path='/signup'>
-        <h1>Sign up</h1>
+        <SignupForm signup={signup} />
       </Route>
       <Route exact path='/profile'>
-        <h1>User Profile</h1>
+        <EditProfileForm />
       </Route>
     </Switch>
   )

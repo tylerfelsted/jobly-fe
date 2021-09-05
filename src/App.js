@@ -1,9 +1,49 @@
 // import './App.css';
+import { useState, useEffect } from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { BrowserRouter, Link, NavLink } from 'react-router-dom';
+import JoblyApi from './api';
+import useLocalStorage from './useLocalStorage';
 import Routes from './Routes';
+import UserContext from './userContext';
+import jwt from 'jsonwebtoken';
 
 function App() {
+  const [ token, setToken ] = useLocalStorage('token');
+  const [ currentUser, setCurrentUser ] = useState();
+  console.log("Current User:", currentUser);
+
+  useEffect(() => {
+    async function getUser() {
+      if(token){
+        JoblyApi.setToken(token);
+        const { username } = jwt.decode(token)
+        const user = await JoblyApi.getUser(username);
+        setCurrentUser(user);
+      } else {
+        JoblyApi.clearToken();
+        setCurrentUser(null);
+      }
+    }
+    getUser();
+  }, [token])
+
+
+  async function login(e, formData) {
+    e.preventDefault();
+    setToken(await JoblyApi.login(formData));
+  }
+
+  async function signup(e, formData) {
+    e.preventDefault();
+    setToken(await JoblyApi.register(formData));
+  }
+
+  function logout() {
+    JoblyApi.token = null;
+    setToken(null);
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -15,12 +55,23 @@ function App() {
           <Nav>
             <NavLink to='/companies'>Companies</NavLink>
             <NavLink to='/jobs'>Jobs</NavLink>
-            <NavLink to='/login'>Log In</NavLink>
-            <NavLink to='/signup'>Sign Up</NavLink>
+            {!currentUser ? 
+              <>
+                <NavLink to='/login'>Log In</NavLink>
+                <NavLink to='/signup'>Sign Up</NavLink>
+              </>
+              : 
+              <> 
+                <NavLink onClick={logout} to='/'>Log Out</NavLink>
+                <NavLink to='/profile'>{currentUser.username}</NavLink>
+              </>
+            }
           </Nav>
           </Container>
         </Navbar>
-        <Routes />
+        <UserContext.Provider value={{currentUser, setCurrentUser }}>
+          <Routes login={login} signup={signup}/>
+        </UserContext.Provider>
       </BrowserRouter>
     </div>
   );
