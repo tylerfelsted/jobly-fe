@@ -2,17 +2,10 @@ import { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Input from './Input';
 import { Container, Form, Button } from 'react-bootstrap';
-import UserContext from './userContext';
-import JoblyApi from './api';
+import UserContext from '../hooks/userContext';
+import JoblyApi from '../api';
 
 function EditProfileForm() {
-  const initialValues = {
-    username: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: ""
-  }
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const [ formData, setFormData ] = useState({firstName: currentUser.firstName,
                                               lastName: currentUser.lastName,

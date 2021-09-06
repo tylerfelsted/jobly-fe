@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import JobCard from "./JobCard";
-import JoblyApi from './api'
+import JoblyApi from '../api'
 import { Container } from 'react-bootstrap';
 
 function JobList() {

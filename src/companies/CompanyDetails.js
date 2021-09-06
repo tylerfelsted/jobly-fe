@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import JoblyApi from './api';
-import JobCard from './JobCard';
+import JoblyApi from '../api';
+import JobCard from '../jobs/JobCard';
 import { Container } from 'react-bootstrap';
 
 function CompanyDetails() {

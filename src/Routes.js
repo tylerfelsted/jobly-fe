@@ -1,11 +1,12 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import CompanyDetails from './CompanyDetails';
-import CompanyList from './CompanyList';
-import JobList from './JobList';
-import SignupForm from './SignupForm';
-import LoginForm from './LoginForm';
-import EditProfileForm from './EditProfileForm';
+import CompanyDetails from './companies/CompanyDetails';
+import CompanyList from './companies/CompanyList';
+import JobList from './jobs/JobList';
+import SignupForm from './users/SignupForm';
+import LoginForm from './users/LoginForm';
+import EditProfileForm from './users/EditProfileForm';
+import Home from './Home';
 
 
 
@@ -13,7 +14,7 @@ function Routes({ login, signup }) {
   return (
     <Switch>
       <Route exact path='/'>
-        <h1>Home Page</h1>
+        <Home />
       </Route>
       <Route exact path='/companies'>
         <CompanyList />
