@@ -5,8 +5,8 @@ import { Container, Form, Button } from 'react-bootstrap';
 
 function LoginForm({ login }) {
   const initialValues = {
-    username: "tfelsted",
-    password: "password"
+    username: "",
+    password: ""
   }
   const [ formData, setFormData ] = useState(initialValues);
 

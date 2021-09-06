@@ -5,11 +5,11 @@ import { Container, Form, Button } from 'react-bootstrap';
 
 function SignupForm({ signup }) {
   const initialValues = {
-    username: "tfelsted",
-    password: "password",
-    firstName: "Tyler",
-    lastName: "Felsted",
-    email: "tyler.felsted@yahoo.com"
+    username: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    email: ""
   }
   const [ formData, setFormData ] = useState(initialValues);
 
