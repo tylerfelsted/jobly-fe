@@ -34,12 +34,14 @@ function EditProfileForm() {
   return (
     <Container>
       <Form onSubmit={(e) => handleSubmit(e, formData)}>
-        {/* <Input id="username" label="Username" type="text" value={formData.username} handleChange={handleChange} /> */}
-        <h3>{formData.username}</h3>
+        <div className="mb-3">
+          <label className="form-label fw-bold" htmlFor="username">Username</label>
+          <p id="username" className="">{currentUser.username}</p>
+        </div>
         <Input id="firstName" label="First Name" type="text" value={formData.firstName} handleChange={handleChange} />
         <Input id="lastName" label="Last Name" type="text" value={formData.lastName} handleChange={handleChange} />
         <Input id="email" label="Email" type="email" value={formData.email} handleChange={handleChange} />
-        <Input id="password" label="Password" type="password" value={formData.password} handleChange={handleChange} />
+        <Input id="password" label="Confirm password to make changes" type="password" value={formData.password} handleChange={handleChange} />
         <Button type="submit">Update Profile</Button>
       </Form>
     </Container>

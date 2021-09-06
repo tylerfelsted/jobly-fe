@@ -1,10 +1,10 @@
 // import './App.css';
 import { useState, useEffect } from 'react';
-import { Navbar, Nav, Container } from 'react-bootstrap';
-import { BrowserRouter, Link, NavLink } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import JoblyApi from './api';
 import useLocalStorage from './hooks/useLocalStorage';
 import Routes from './Routes';
+import Navigation from './Navigation';
 import UserContext from './hooks/userContext';
 import jwt from 'jsonwebtoken';
 
@@ -65,29 +65,8 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar bg="dark" varient="dark">
-          <Container>
-          <Navbar.Brand>
-            <Link to='/'>Jobly</Link>
-          </Navbar.Brand>
-          <Nav>
-            <NavLink to='/companies'>Companies</NavLink>
-            <NavLink to='/jobs'>Jobs</NavLink>
-            {!currentUser ? 
-              <>
-                <NavLink to='/login'>Log In</NavLink>
-                <NavLink to='/signup'>Sign Up</NavLink>
-              </>
-              : 
-              <> 
-                <NavLink onClick={logout} to='/'>Log Out</NavLink>
-                <NavLink to='/profile'>{currentUser.username}</NavLink>
-              </>
-            }
-          </Nav>
-          </Container>
-        </Navbar>
         <UserContext.Provider value={{currentUser, setCurrentUser, applyToJob, jobsAppliedTo }}>
+          <Navigation logout={logout} />
           <Routes login={login} signup={signup}/>
         </UserContext.Provider>
       </BrowserRouter>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Input from './Input';
 import { Container, Form, Button } from 'react-bootstrap';
 
@@ -12,12 +13,15 @@ function SignupForm({ signup }) {
   }
   const [ formData, setFormData ] = useState(initialValues);
 
+  const history = useHistory();
+
   function handleChange(e) {
     setFormData({...formData, [e.target.name]: e.target.value});
   }
 
   async function handleSubmit(e, formData) {
     await signup(e, formData)
+    history.push('/')
   }
 
   return (
